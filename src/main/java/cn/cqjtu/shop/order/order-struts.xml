@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="order" extends="mydefault" namespace="/">
+		<!-- 配置订单的action -->
+		<action name="order_*" class="orderAction" method="{1}">
+			<!-- <result name="addOrder">/WEB-INF/jsp/order.jsp</result> -->
+			<result name="addOrder" type="redirectAction">order_findByOid.action?oid=${model.oid}
+			</result>
+			<result name="findByUid">/WEB-INF/jsp/orderlist.jsp</result>
+			<result name="findByOid">/WEB-INF/jsp/order.jsp</result>
+			<result name="updateState" type="redirectAction">order_findByUid.action?page=1
+			</result>
+			<interceptor-ref name="autoLoginInterceptor" />
+			<interceptor-ref name="interceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		<!-- 配置后台订单管理的action -->
+		<action name="adminOrder_*" class="adminOrderAction" method="{1}">
+			<result name="findAll">/admin/order/list.jsp</result>
+			<result name="findOrderItemByOid">/admin/order/Order.jsp</result>
+			<result name="updateOrderState" type="redirectAction">adminOrder_findAll.action?page=1
+			</result>
+			<interceptor-ref name="adminInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>

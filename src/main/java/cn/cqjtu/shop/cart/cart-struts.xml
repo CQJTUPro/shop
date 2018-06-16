@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="cart" extends="mydefault" namespace="/">
+		<!-- 配置购物车的action -->
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="addCartItem" type="redirectAction">cart_cartPage</result>
+			<result name="clearCart" type="redirectAction">cart_cartPage</result>
+			<result name="removeCartItem" type="redirectAction">cart_cartPage</result>
+			<result name="cartPage">/WEB-INF/jsp/cart.jsp</result>
+			<interceptor-ref name="autoLoginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>

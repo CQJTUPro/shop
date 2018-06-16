@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="user" extends="mydefault" namespace="/">
+		<!-- 配置用户模块的action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/regist.jsp</result>
+			<!-- 后台校验<result name="input">/WEB-INF/jsp/regist.jsp</result> -->
+			<!-- 登录失败 返回到登录页面 -->
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<!-- 登录成功后 需重定向到主页 -->
+			<result name="loginSuccess" type="redirectAction">index</result>
+			<!-- 登录失败 -->
+			<result name="loginFail">user_loginPage.action</result>
+			<!-- 激活成功 跳转到登录页面 -->
+			<result name="activeSuccess">/WEB-INF/jsp/login.jsp</result>
+			<result name="quit" type="redirectAction">index</result>
+			<result name="checkcodeFail">/WEB-INF/jsp/regist.jsp</result>
+		</action>
+		<!-- 验证码的action -->
+		<action name="checkImg" class="checkImgAction"></action>
+
+		<!-- 配置后台用户管理的action -->
+		<action name="adminUsers_*" class="adminUsersAction" method="{1}">
+			<result name="findAll">/admin/user/list.jsp</result>
+			<result name="removeUser" type="redirectAction">adminUsers_findAll.action?page=1
+			</result>
+			<result name="editUserPage">/admin/user/edit.jsp</result>
+			<result name="editUser" type="redirectAction">adminUsers_findAll.action?page=1
+			</result>
+			<interceptor-ref name="adminInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>

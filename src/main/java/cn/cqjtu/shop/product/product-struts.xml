@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="product" extends="mydefault" namespace="/">
+		<!-- 配置商品的action -->
+		<action name="product_*" class="productAction" method="{1}">
+			<result name="productPage">/WEB-INF/jsp/product.jsp</result>
+			<result name="findByParentidPage">/WEB-INF/jsp/productlist.jsp</result>
+			<result name="findByCidPage">/WEB-INF/jsp/productlist.jsp</result>
+			<interceptor-ref name="autoLoginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+		<!-- 后台商品管理的Action -->
+		<action name="adminProduct_*" class="adminProductAction"
+			method="{1}">
+			<result name="findAll">/admin/product/list.jsp</result>
+			<result name="addProductPage">/admin/product/add.jsp</result>
+			<result name="addProduct" type="redirectAction">adminProduct_findAll.action?page=1
+			</result>
+			<result name="removeProduct" type="redirectAction">adminProduct_findAll.action?page=1
+			</result>
+			<result name="editProductPage">/admin/product/edit.jsp</result>
+			<result name="editProduct" type="redirectAction">adminProduct_findAll.action?page=1
+			</result>
+			<interceptor-ref name="adminInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>

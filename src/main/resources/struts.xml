@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="mydefault" extends="struts-default" namespace="/">
+		<!-- 自定义拦截器 -->
+		<interceptors>
+			<interceptor name="adminInterceptor" class="adminInterceptor">
+			</interceptor>
+			<interceptor name="interceptor" class="interceptor">
+			</interceptor>
+			<interceptor name="autoLoginInterceptor" class="autoLoginInterceptor">
+			</interceptor>
+		</interceptors>
+		<global-results>
+			<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
+			<result name="nologinAdminUser">/admin/index.jsp</result>
+			<result name="nologinUser">user_loginPage.action</result>
+		</global-results>
+	</package>
+	<package name="main" extends="mydefault" namespace="/">
+		<!-- 配置首页访问的action -->
+		<action name="index" class="indexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+			<interceptor-ref name="autoLoginInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+	<!-- 引入其他struts配置文件 -->
+	<include file="cn/cqjtu/shop/user/user-struts.xml"></include>
+	<include file="cn/cqjtu/shop/adminuser/adminuser-struts.xml"></include>
+	<include file="cn/cqjtu/shop/cart/cart-struts.xml"></include>
+	<include file="cn/cqjtu/shop/category/category-struts.xml"></include>
+	<include file="cn/cqjtu/shop/order/order-struts.xml"></include>
+	<include file="cn/cqjtu/shop/product/product-struts.xml"></include>
+</struts>

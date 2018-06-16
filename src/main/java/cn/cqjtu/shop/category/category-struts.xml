@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="category" extends="mydefault" namespace="/">
+		<!-- 配置商品类别的action -->
+		<action name="category_*" class="categoryAction" method="{1}">
+		</action>
+		<!-- 配置后台分类管理的action -->
+		<action name="adminCategory_*" class="adminCategoryAction"
+			method="{1}">
+			<result name="findFirst">/admin/category/list.jsp</result>
+			<result name="addFirst" type="redirectAction">adminCategory_findFirst.action
+			</result>
+			<result name="removeFirst" type="redirectAction">adminCategory_findFirst.action
+			</result>
+			<result name="editFirstPage">/admin/category/edit.jsp</result>
+			<result name="editFirst" type="redirectAction">adminCategory_findFirst.action
+			</result>
+			<result name="findSecond">/admin/secondcategory/list.jsp</result>
+			<result name="addSecondPage">/admin/secondcategory/add.jsp</result>
+			<result name="addSecond" type="redirectAction">adminCategory_findSecond.action?page=1
+			</result>
+			<result name="removeSecond" type="redirectAction">adminCategory_findSecond.action?page=1
+			</result>
+			<result name="editSecondPage">/admin/secondcategory/edit.jsp</result>
+			<result name="editSecond" type="redirectAction">adminCategory_findSecond.action?page=1
+			</result>
+			<interceptor-ref name="adminInterceptor" />
+			<interceptor-ref name="defaultStack" />
+		</action>
+	</package>
+</struts>
