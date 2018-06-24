@@ -1,7 +1,13 @@
 package cn.cqjtu.shop.order.adminaction;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.google.gson.Gson;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -37,7 +43,7 @@ public class AdminOrderAction extends ActionSupport implements ModelDriven<Order
 		return "findAll";
 	}
 
-	// 根据订单id查询所有订单项
+	// 根据订单id异步查询所有订单项
 	public String findOrderItemByOid() {
 		List<OrderItem> oilist=orderService.findOrderItemByOid(order.getOid());
 		ActionContext.getContext().getValueStack().set("oilist", oilist);

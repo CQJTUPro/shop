@@ -20,7 +20,7 @@
 		<!-- 配置后台订单管理的action -->
 		<action name="adminOrder_*" class="adminOrderAction" method="{1}">
 			<result name="findAll">/admin/order/list.jsp</result>
-			<result name="findOrderItemByOid">/admin/order/Order.jsp</result>
+			<result name="findOrderItemByOid">/admin/order/orderItem.jsp</result>
 			<result name="updateOrderState" type="redirectAction">adminOrder_findAll.action?page=1
 			</result>
 			<interceptor-ref name="adminInterceptor" />

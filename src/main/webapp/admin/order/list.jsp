@@ -7,6 +7,10 @@
 <link href="${pageContext.request.contextPath}/css/Style1.css" rel="stylesheet" type="text/css" />
 <link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet"
 	type="text/css" />
+<!-- 弹出层插件 -->
+<link href="${pageContext.request.contextPath}/css/popup_layer.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/popup_layer.js"></script>		
 <script language="javascript" src="${pageContext.request.contextPath}/js/public.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/admin/order/list.js">
 </script>
@@ -58,8 +62,9 @@
 												</s:if> <s:if test="#o.state==4">
 												交易完成
 												</s:if></td>
+												<!-- onclick="showDetail(<s:property value="#o.oid"/>)" -->
 									<td align="center" style="HEIGHT: 22px"><input id="btn<s:property value="#o.oid"/>"
-										onclick="showDetail(<s:property value="#o.oid"/>)" type="button" value="详细信息">
+										onclick="findOrderItemByOid(<s:property value="#o.oid"/>)" type="button" value="详细信息" class="clickedElement">
 										<div id="div<s:property value="#o.oid"/>"></div></td>
 								</tr>
 							</s:iterator>
@@ -87,6 +92,22 @@
 			</TBODY>
 		</table>
 	</form>
+	<!-- 弹出层 订单详情  -->
+        <div id="showOrderItemDiv" class="blk" style="display:none;">
+            <div class="main">
+                <h2>订单编号：<span id="shodDivOid" style="font-size: 13px;color: #999">123456789</span></h2>
+                <a href="javascript:void(0);" id="closeBtn" class="closeBtn">关闭</a>
+                <div id="loading" style="padding-top:30px;text-align: center;">
+                	<img alt="" style="width:100px;height:100px;" src="${pageContext.request.contextPath }/images/loading.gif">
+                </div>
+				<div style="padding:20px;">
+					<table id="showDivTab" style="width:100%">
+						
+					</table>
+				</div>
+            </div>
+            
+        </div>
 </body>
 </HTML>
 

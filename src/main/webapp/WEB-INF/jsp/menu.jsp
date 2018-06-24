@@ -117,7 +117,7 @@
 	</ul>
 </div>
 <script type="text/javascript">
-	//header.jsp加载完毕后 去服务器端获得所有的category数据
+	//menu.jsp加载完毕后 去服务器端获得所有的category数据
 	$(function(){
 		var content = "<li><a href='${pageContext.request.contextPath}/index.action'>首页</a> |</li>";
 		$.post(
