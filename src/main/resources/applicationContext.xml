@@ -44,7 +44,7 @@
 		<!-- 配置Hibernate的映射文件 -->
 		<property name="mappingResources">
 			<list>
-				<value>cn/cqjtu/shop/user/vo/User.hbm.xml</value>
+			    <value>cn/cqjtu/shop/user/vo/User.hbm.xml</value>
 				<value>cn/cqjtu/shop/category/vo/Category.hbm.xml</value>
 				<value>cn/cqjtu/shop/product/vo/Product.hbm.xml</value>
 				<value>cn/cqjtu/shop/order/vo/Order.hbm.xml</value>
@@ -64,10 +64,12 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<!-- 自定义Struts拦截器 -->
+	
+	<!-- 后台权限拦截器 -->
 	<bean id="adminInterceptor" class="cn.cqjtu.shop.interceptor.AdminInterceptor"
 		scope="prototype">
 	</bean>
-	<!-- 权限拦截器 -->
+	<!-- 前台权限拦截器 -->
 	<bean id="interceptor" class="cn.cqjtu.shop.interceptor.Interceptor"
 		scope="prototype">
 	</bean>
@@ -84,123 +86,16 @@
 		<property name="categoryService" ref="categoryService"></property>
 		<property name="productService" ref="productService"></property>
 	</bean>
-
-	<!-- 用户模块的Action -->
-	<bean id="userAction" class="cn.cqjtu.shop.user.action.UserAction"
-		scope="prototype">
-		<!-- 注入service -->
-		<property name="userService" ref="userService"></property>
-	</bean>
-	<!-- 验证码Action -->
-	<bean id="checkImgAction" class="cn.cqjtu.shop.user.action.CheckImgAction"
-		scope="prototype">
-	</bean>
-	<!-- 种类模块Action -->
-	<bean id="categoryAction" class="cn.cqjtu.shop.category.action.CategoryAction"
-		scope="prototype">
-		<!-- 注入service -->
-		<property name="categoryService" ref="categoryService"></property>
-	</bean>
-	<!-- 商品模块Action -->
-	<bean id="productAction" class="cn.cqjtu.shop.product.action.ProductAction"
-		scope="prototype">
-		<!-- 注入service -->
-		<property name="productService" ref="productService"></property>
-	</bean>
-	<!-- 购物车模块Action -->
-	<bean id="cartAction" class="cn.cqjtu.shop.cart.action.CartAction"
-		scope="prototype">
-		<property name="productService" ref="productService"></property>
-	</bean>
-	<!-- 订单模块Action -->
-	<bean id="orderAction" class="cn.cqjtu.shop.order.action.OrderAction"
-		scope="prototype">
-		<property name="orderService" ref="orderService"></property>
-	</bean>
-	<!-- 管理员模块Action -->
-	<bean id="adminUserAction" class="cn.cqjtu.shop.adminuser.action.AdminUserAction"
-		scope="prototype">
-		<property name="adminUserService" ref="adminUserService"></property>
-	</bean>
-	<!-- 用户管理模块Action -->
-	<bean id="adminUsersAction" class="cn.cqjtu.shop.user.adminaction.AdminUsersAction"
-		scope="prototype">
-		<property name="userService" ref="userService"></property>
-	</bean>
-	<!-- 分类管理模块Action -->
-	<bean id="adminCategoryAction" class="cn.cqjtu.shop.category.adminaction.AdminCategoryAction"
-		scope="prototype">
-		<property name="categoryService" ref="categoryService"></property>
-	</bean>
-	<!-- 商品管理模块Action -->
-	<bean id="adminProductAction" class="cn.cqjtu.shop.product.adminaction.AdminProductAction"
-		scope="prototype">
-		<property name="productService" ref="productService"></property>
-		<property name="categoryService" ref="categoryService"></property>
-	</bean>
-
-	<!-- 订单管理模块Action -->
-	<bean id="adminOrderAction" class="cn.cqjtu.shop.order.adminaction.AdminOrderAction"
-		scope="prototype">
-		<property name="orderService" ref="orderService"></property>
-	</bean>
+	
 	<!-- Service的配置 =========================== -->
 
-	<!-- 用户模块Service -->
-	<bean id="userService" class="cn.cqjtu.shop.user.service.UserService"
-		scope="prototype">
-		<!-- 注入dao -->
-		<property name="userDao" ref="userDao"></property>
-	</bean>
-	<!-- 种类模块Service -->
-	<bean id="categoryService" class="cn.cqjtu.shop.category.service.CategoryService"
-		scope="prototype">
-		<!-- 注入dao -->
-		<property name="categoryDao" ref="categoryDao"></property>
-	</bean>
-	<!-- 商品模块Service -->
-	<bean id="productService" class="cn.cqjtu.shop.product.service.ProductService"
-		scope="prototype">
-		<!-- 注入dao -->
-		<property name="productDao" ref="productDao"></property>
-	</bean>
-	<!-- 订单模块Service -->
-	<bean id="orderService" class="cn.cqjtu.shop.order.service.OrderService"
-		scope="prototype">
-		<!-- 注入dao -->
-		<property name="orderDao" ref="orderDao"></property>
-	</bean>
-	<!-- 管理员模块Service -->
-	<bean id="adminUserService" class="cn.cqjtu.shop.adminuser.service.AdminUserService"
-		scope="prototype">
-		<!-- 注入dao -->
-		<property name="adminUserDao" ref="adminUserDao"></property>
-	</bean>
 	<!-- Dao的配置 =========================== -->
-
-	<!-- 用户模块Dao -->
-	<bean id="userDao" class="cn.cqjtu.shop.user.dao.UserDao" scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<!-- 种类模块Dao -->
-	<bean id="categoryDao" class="cn.cqjtu.shop.category.dao.CategoryDao"
-		scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<!-- 商品模块Dao -->
-	<bean id="productDao" class="cn.cqjtu.shop.product.dao.ProductDao"
-		scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<!-- 订单模块Dao -->
-	<bean id="orderDao" class="cn.cqjtu.shop.order.dao.OrderDao"
-		scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-	<!-- 管理员Dao -->
-	<bean id="adminUserDao" class="cn.cqjtu.shop.adminuser.dao.AdminUserDao"
-		scope="prototype">
-		<property name="sessionFactory" ref="sessionFactory"></property>
-	</bean>
-
+     
+    <!-- 导入各个模块的spring配置文件 -->
+    <import resource="cn/cqjtu/shop/user/user-spring.xml" />
+    <import resource="cn/cqjtu/shop/product/product-spring.xml" />
+    <import resource="cn/cqjtu/shop/order/order-spring.xml" />
+    <import resource="cn/cqjtu/shop/cart/cart-spring.xml" />
+    <import resource="cn/cqjtu/shop/category/category-spring.xml" />
+    <import resource="cn/cqjtu/shop/adminuser/adminuser-spring.xml" />
 </beans>

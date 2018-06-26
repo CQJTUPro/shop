@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xmlns:soap="http://cxf.apache.org/bindings/soap" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd
+						http://cxf.apache.org/bindings/soap 
+						http://cxf.apache.org/schemas/configuration/soap.xsd
+						http://cxf.apache.org/jaxws 
+						http://cxf.apache.org/schemas/jaxws.xsd">
+
+	<!-- Action的配置 =========================== -->
+
+	<!-- 用户模块的Action -->
+	<bean id="userAction" class="cn.cqjtu.shop.user.action.UserAction"
+		scope="prototype">
+		<!-- 注入service -->
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!-- 验证码Action -->
+	<bean id="checkImgAction" class="cn.cqjtu.shop.user.action.CheckImgAction"
+		scope="prototype">
+	</bean>
+	
+    <!-- 用户管理模块Action -->
+	<bean id="adminUsersAction" class="cn.cqjtu.shop.user.adminaction.AdminUsersAction"
+		scope="prototype">
+		<property name="userService" ref="userService"></property>
+	</bean>
+	
+	<!-- Service的配置 =========================== -->
+
+	<!-- 用户模块Service -->
+	<bean id="userService" class="cn.cqjtu.shop.user.service.UserService"
+		scope="prototype">
+		<!-- 注入dao -->
+		<property name="userDao" ref="userDao"></property>
+	</bean>
+	<!-- Dao的配置 =========================== -->
+
+	<!-- 用户模块Dao -->
+	<bean id="userDao" class="cn.cqjtu.shop.user.dao.UserDao" scope="prototype">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+</beans>

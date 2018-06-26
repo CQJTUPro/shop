@@ -8,8 +8,6 @@
 		<action name="user_*" class="userAction" method="{1}">
 			<result name="registPage">/WEB-INF/jsp/regist.jsp</result>
 			<!-- 后台校验<result name="input">/WEB-INF/jsp/regist.jsp</result> -->
-			<!-- 登录失败 返回到登录页面 -->
-			<result name="login">/WEB-INF/jsp/login.jsp</result>
 			<!-- 登录成功后 需重定向到主页 -->
 			<result name="loginSuccess" type="redirectAction">index</result>
 			<!-- 登录失败 -->
